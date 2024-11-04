@@ -68,7 +68,7 @@
         "operationId": "getPetById",
         "parameters": [
           {
-            "name": "petId",
+            "name": "petIdModificatDemonGenesis",
             "in": "path",
             "required": true,
             "description": "ID of pet to fetch",
