@@ -53,9 +53,6 @@
           }
         },
         "responses": {
-          "201": {
-            "description": "Pet created successfully"
-          },
           "400": {
             "description": "Invalid input"
           }
