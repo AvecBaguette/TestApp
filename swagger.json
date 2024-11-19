@@ -62,7 +62,7 @@
         }
       }
     },
-    "/pets/{petId}": {
+    "/pets/{petId}/type": {
       "get": {
         "summary": "Info for a specific pet",
         "operationId": "getPetById",
@@ -72,6 +72,15 @@
             "in": "path",
             "required": true,
             "description": "ID of pet to fetch",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "type",
+            "in": "path",
+            "required": true,
+            "description": "Type of pet to fetch",
             "schema": {
               "type": "string"
             }
