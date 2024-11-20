@@ -1,95 +1,159 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Pet Store API",
+    "title": "Library Management API",
     "version": "1.0.0",
-    "description": "A simple API for managing a pet store."
+    "description": "API for managing a library system."
   },
   "paths": {
-    "/pets": {
+    "/books": {
       "get": {
-        "summary": "List all pets",
-        "operationId": "listPets",
-        "parameters": [
-          {
-            "name": "limit",
-            "in": "query",
-            "required": false,
-            "description": "Maximum number of results to return",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
+        "summary": "Get all books",
+        "operationId": "getAllBooks",
         "responses": {
           "200": {
-            "description": "A paged array of pets",
+            "description": "A list of books",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Pet"
+                    "$ref": "#/components/schemas/Book"
+                  }
+                },
+                "examples": {
+                  "example1": {
+                    "summary": "A sample book list",
+                    "value": [
+                      {
+                        "id": "1",
+                        "title": "1984",
+                        "author": "George Orwell"
+                      },
+                      {
+                        "id": "2",
+                        "title": "To Kill a Mockingbird",
+                        "author": "Harper Lee"
+                      }
+                    ]
                   }
                 }
               }
             }
           }
         }
-      },
+      }
+    },
+    "/books/{bookId}": {
+      "get": {
+        "summary": "Get a specific book",
+        "operationId": "getBookById",
+        "parameters": [
+          {
+            "name": "bookId",
+            "in": "path",
+            "required": true,
+            "description": "The ID of the book to retrieve",
+            "schema": {
+              "type": "string"
+            },
+            "example": "1"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Details of a book",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Book"
+                },
+                "examples": {
+                  "example1": {
+                    "summary": "A sample book",
+                    "value": {
+                      "id": "1",
+                      "title": "1984",
+                      "author": "George Orwell"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Book not found",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "example1": {
+                    "summary": "Book not found error",
+                    "value": {
+                      "error": "Book not found"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/books": {
       "post": {
-        "summary": "Create a pet",
-        "operationId": "createPet",
+        "summary": "Add a new book",
+        "operationId": "addBook",
         "requestBody": {
-          "description": "Pet to add to the store",
+          "description": "Book to add",
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Pet"
+                "$ref": "#/components/schemas/Book"
+              },
+              "examples": {
+                "example1": {
+                  "summary": "A sample book to add",
+                  "value": {
+                    "id": "3",
+                    "title": "The Catcher in the Rye",
+                    "author": "J.D. Salinger"
+                  }
+                }
               }
             }
           }
         },
         "responses": {
           "201": {
-            "description": "Pet created successfully"
-          },
-          "400": {
-            "description": "Invalid input"
-          }
-        }
-      }
-    },
-    "/pets/{petId}": {
-      "get": {
-        "summary": "Info for a specific pet",
-        "operationId": "getPetById",
-        "parameters": [
-          {
-            "name": "petId",
-            "in": "path",
-            "required": true,
-            "description": "ID of pet to fetch",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Details of a pet",
+            "description": "Book added successfully",
             "content": {
               "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Pet"
+                "examples": {
+                  "example1": {
+                    "summary": "Success response",
+                    "value": {
+                      "message": "Book added successfully"
+                    }
+                  }
                 }
               }
             }
           },
-          "404": {
-            "description": "Pet not found"
+          "400": {
+            "description": "Invalid input",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "example1": {
+                    "summary": "Validation error",
+                    "value": {
+                      "error": "Invalid input data"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -97,21 +161,21 @@
   },
   "components": {
     "schemas": {
-      "Pet": {
+      "Book": {
         "type": "object",
-        "required": ["id", "name"],
+        "required": ["id", "title", "author"],
         "properties": {
           "id": {
             "type": "string",
-            "description": "Unique identifier for the pet"
+            "description": "Unique identifier for the book"
           },
-          "name": {
+          "title": {
             "type": "string",
-            "description": "Name of the pet"
+            "description": "Title of the book"
           },
-          "tag": {
+          "author": {
             "type": "string",
-            "description": "Tag associated with the pet"
+            "description": "Author of the book"
           }
         }
       }
