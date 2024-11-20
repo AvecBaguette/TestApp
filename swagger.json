@@ -125,7 +125,7 @@
           }
         },
         "responses": {
-          "201": {
+          "200": {
             "description": "Book added successfully",
             "content": {
               "application/json": {
