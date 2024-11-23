@@ -7,6 +7,13 @@
             "description": "Retrieve all books"
           }
         }
+      },
+      "post": {
+        "responses": {
+          "201": {
+            "description": "Add a new book"
+          }
+        }
       }
     },
     "/books/{bookId}": {
@@ -14,13 +21,9 @@
         "responses": {
           "200": {
             "description": "Retrieve details of a specific book"
-          }
-        }
-      },
-      "delete": {
-        "responses": {
-          "204": {
-            "description": "Delete a specific book"
+          },
+          "404": {
+            "description": "Book not found"
           }
         }
       }
