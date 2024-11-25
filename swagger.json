@@ -4,7 +4,7 @@
       "get": {
         "responses": {
           "200": {
-            "description": "Retrieve all books"
+            "description": "Updated description"
           }
         }
       }
@@ -14,13 +14,6 @@
         "responses": {
           "200": {
             "description": "Retrieve details of a specific book"
-          }
-        }
-      },
-      "delete": {
-        "responses": {
-          "204": {
-            "description": "Delete a specific book"
           }
         }
       }
