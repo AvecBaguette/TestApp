@@ -3,7 +3,7 @@
     "/books": {
       "get": {
         "responses": {
-          "200": {
+          "201": {
             "description": "Retrieve all books"
           }
         }
